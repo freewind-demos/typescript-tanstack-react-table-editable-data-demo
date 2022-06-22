@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import Hello from './hello'
+import {Table} from './Table'
 
 ReactDOM.render(
-  <Hello/>,
-  document.body
+  <Table/>,
+  document.getElementById('root')
 )
