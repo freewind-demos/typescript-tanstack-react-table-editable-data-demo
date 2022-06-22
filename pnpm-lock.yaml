@@ -1,9 +1,11 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@faker-js/faker': ^6.3.1
   '@rollup/plugin-replace': 4.0.0
   '@tanstack/react-table': 8.0.0-beta.9
   '@tanstack/table-core': ^8.0.0
+  '@types/faker': ^5.5.9
   '@types/react': ^18.0.14
   '@types/react-dom': ^18.0.5
   '@vitejs/plugin-react': ^1.3.2
@@ -14,6 +16,7 @@ specifiers:
   vite: 2.8.6
 
 dependencies:
+  '@faker-js/faker': 6.3.1
   '@tanstack/react-table': 8.0.0-beta.9_react-dom@17.0.2+react@17.0.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -22,6 +25,7 @@ dependencies:
 devDependencies:
   '@rollup/plugin-replace': 4.0.0_rollup@2.75.7
   '@tanstack/table-core': 8.0.0
+  '@types/faker': 5.5.9
   '@types/react': 18.0.14
   '@types/react-dom': 18.0.5
   '@vitejs/plugin-react': 1.3.2
@@ -289,6 +293,11 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
+  /@faker-js/faker/6.3.1:
+    resolution: {integrity: sha512-8YXBE2ZcU/pImVOHX7MWrSR/X5up7t6rPWZlk34RwZEcdr3ua6X+32pSd6XuOQRN+vbuvYNfA6iey8NbrjuMFQ==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: false
+
   /@jridgewell/gen-mapping/0.1.1:
     resolution: {integrity: sha512-sQXCasFk+U8lWYEe66WxRDOE9PjVz4vSM51fTu3Hw+ClTpUSQb718772vH3pyS5pShp6lvQM7SxgIDXXXmOX7w==}
     engines: {node: '>=6.0.0'}
@@ -381,6 +390,10 @@ packages:
 
   /@types/estree/0.0.39:
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
+    dev: true
+
+  /@types/faker/5.5.9:
+    resolution: {integrity: sha512-uCx6mP3UY5SIO14XlspxsGjgaemrxpssJI0Ol+GfhxtcKpv9pgRZYsS4eeKeHVLje6Qtc8lGszuBI461+gVZBA==}
     dev: true
 
   /@types/prop-types/15.7.5:

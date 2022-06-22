@@ -1,5 +1,5 @@
-TypeScript React Table Basic Demo
-=================================
+TypeScript React Table Column Ordering Demo
+===========================================
 
 ```
 npm install

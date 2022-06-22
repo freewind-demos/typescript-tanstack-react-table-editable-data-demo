@@ -1,51 +1,18 @@
-import * as React from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
+import faker from '@faker-js/faker'
 
 import './index.css'
 
 import {
+  ColumnOrderState,
   createTable,
   getCoreRowModel,
   useTableInstance,
 } from '@tanstack/react-table'
+import { makeData, Person } from './makeData'
 
-type Person = {
-  firstName: string
-  lastName: string
-  age: number
-  visits: number
-  status: string
-  progress: number
-}
-
-const table = createTable().setRowType<Person>()
-
-const defaultData: Person[] = [
-  {
-    firstName: 'tanner',
-    lastName: 'linsley',
-    age: 24,
-    visits: 100,
-    status: 'In Relationship',
-    progress: 50,
-  },
-  {
-    firstName: 'tandy',
-    lastName: 'miller',
-    age: 40,
-    visits: 40,
-    status: 'Single',
-    progress: 80,
-  },
-  {
-    firstName: 'joe',
-    lastName: 'dirte',
-    age: 45,
-    visits: 20,
-    status: 'Complicated',
-    progress: 10,
-  },
-]
+let table = createTable().setRowType<Person>()
 
 const defaultColumns = [
   table.createGroup({
@@ -94,21 +61,77 @@ const defaultColumns = [
 ]
 
 function App() {
-  const [data, setData] = React.useState(() => [...defaultData])
-  const [columns] = React.useState<typeof defaultColumns>(() => [
-    ...defaultColumns,
-  ])
+  const [data, setData] = React.useState(() => makeData(20))
+  const [columns] = React.useState(() => [...defaultColumns])
 
-  const rerender = React.useReducer(() => ({}), {})[1]
+  const [columnVisibility, setColumnVisibility] = React.useState({})
+  const [columnOrder, setColumnOrder] = React.useState<ColumnOrderState>([])
+
+  const rerender = () => setData(() => makeData(20))
 
   const instance = useTableInstance(table, {
     data,
     columns,
+    state: {
+      columnVisibility,
+      columnOrder,
+    },
+    onColumnVisibilityChange: setColumnVisibility,
+    onColumnOrderChange: setColumnOrder,
     getCoreRowModel: getCoreRowModel(),
+    debugTable: true,
+    debugHeaders: true,
+    debugColumns: true,
   })
+
+  const randomizeColumns = () => {
+    instance.setColumnOrder(
+      faker.helpers.shuffle(instance.getAllLeafColumns().map(d => d.id))
+    )
+  }
 
   return (
     <div className="p-2">
+      <div className="inline-block border border-black shadow rounded">
+        <div className="px-1 border-b border-black">
+          <label>
+            <input
+              {...{
+                type: 'checkbox',
+                checked: instance.getIsAllColumnsVisible(),
+                onChange: instance.getToggleAllColumnsVisibilityHandler(),
+              }}
+            />{' '}
+            Toggle All
+          </label>
+        </div>
+        {instance.getAllLeafColumns().map(column => {
+          return (
+            <div key={column.id} className="px-1">
+              <label>
+                <input
+                  {...{
+                    type: 'checkbox',
+                    checked: column.getIsVisible(),
+                    onChange: column.getToggleVisibilityHandler(),
+                  }}
+                />{' '}
+                {column.id}
+              </label>
+            </div>
+          )
+        })}
+      </div>
+      <div className="h-4" />
+      <div className="flex flex-wrap gap-2">
+        <button onClick={() => rerender()} className="border p-1">
+          Regenerate
+        </button>
+        <button onClick={() => randomizeColumns()} className="border p-1">
+          Shuffle Columns
+        </button>
+      </div>
+      <div className="h-4" />
       <table>
         <thead>
         {instance.getHeaderGroups().map(headerGroup => (
@@ -142,10 +165,7 @@ function App() {
         ))}
         </tfoot>
       </table>
-      <div className="h-4" />
-      <button onClick={() => rerender()} className="border p-2">
-        Rerender
-      </button>
+      <pre>{JSON.stringify(instance.getState().columnOrder, null, 2)}</pre>
     </div>
   )
 }
