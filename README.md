@@ -1,4 +1,4 @@
-TypeScript React Table Demo
+TypeScript React Table Basic Demo
 =================================
 
 ```
