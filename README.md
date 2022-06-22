@@ -1,4 +1,4 @@
-TypeScript React Table Column Pinning Demo
+TypeScript React Table Column Visibility Demo
 ===========================================
 
 ```
