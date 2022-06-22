@@ -1,4 +1,4 @@
-TypeScript React Table Column Ordering Demo
+TypeScript React Table Column Pinning Demo
 ===========================================
 
 ```
